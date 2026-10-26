@@ -29,6 +29,7 @@ AIエンジニアリング実践講座（AIE2026）の演習と宿題で使う�
 uv run pytest -q
 uv run python -m app.ask "LoRAとは何ですか？"
 uv run python -m app.ask --temperature 0.7 "LoRAとは何ですか？"
+uv run python -m app.ask --interactive
 ```
 
 詳しい手順は [lectures/01/problem.md](lectures/01/problem.md) を見てください。
@@ -90,5 +91,12 @@ uv run python -m app.ask --temperature 0.2 "LoRAとは何ですか？"
 ```
 
 `--temperature` を省略するとモデルの既定値が使われます。
+
+`--interactive` を付けると、同じ会話の履歴を保ったまま続けて質問できます。終了するには `exit` または `quit` を入力してください。履歴はそのプロセスの実行中だけ保持されます。最初の質問をコマンドライン引数で渡すこともできます。
+
+```bash
+uv run python -m app.ask --interactive
+uv run python -m app.ask --interactive "LoRAとは何ですか？"
+```
 
 無料枠には1分あたり・1日あたりのリクエスト上限があります。上限は [Gemini API のレート制限のページ](https://ai.google.dev/gemini-api/docs/rate-limits) で確認してください。
