@@ -91,4 +91,9 @@ GitHub の自分の fork で、`lec01` → `main` の PR を作成します。**
 AIE_MODEL=gemini-3.5-flash uv run python -m app.ask "LoRAとは何ですか？"
 ```
 
-temperature を変えるには、`generate_content` の `config` 引数を調べてみましょう。
+temperature を変えるには、`--temperature` オプションを指定して実行します。たとえば `0.2` と `1.0` を試し、回答の違いを比べてみましょう。
+
+```bash
+uv run python -m app.ask --temperature 0.2 "LoRAとは何ですか？"
+uv run python -m app.ask --temperature 1.0 "LoRAとは何ですか？"
+```

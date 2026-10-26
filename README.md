@@ -28,6 +28,7 @@ AIエンジニアリング実践講座（AIE2026）の演習と宿題で使う�
 ```bash
 uv run pytest -q
 uv run python -m app.ask "LoRAとは何ですか？"
+uv run python -m app.ask --temperature 0.7 "LoRAとは何ですか？"
 ```
 
 詳しい手順は [lectures/01/problem.md](lectures/01/problem.md) を見てください。
@@ -85,6 +86,9 @@ pyproject.toml / uv.lock  依存パッケージとその固定版
 
 ```bash
 AIE_MODEL=gemini-3.5-flash uv run python -m app.ask "LoRAとは何ですか？"
+uv run python -m app.ask --temperature 0.2 "LoRAとは何ですか？"
 ```
+
+`--temperature` を省略するとモデルの既定値が使われます。
 
 無料枠には1分あたり・1日あたりのリクエスト上限があります。上限は [Gemini API のレート制限のページ](https://ai.google.dev/gemini-api/docs/rate-limits) で確認してください。
