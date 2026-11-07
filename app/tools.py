@@ -10,6 +10,7 @@ from functools import cache
 from pathlib import Path
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
+PROJECT_DIR = DATA_DIR.parent
 MAX_RESULTS = 3
 
 
@@ -94,3 +95,18 @@ def make_quiz(lecture: int) -> str:
     }
     return json.dumps(quiz, ensure_ascii=False)
 
+
+def save_learning_log(lecture: int) -> str:
+    """指定した回の講義要点を learning_log フォルダに保存する。
+
+    「第3回の学習記録を保存して」のように、保存先が必要な依頼で使う。
+    """
+    summary = get_lecture_summary(lecture)
+    if not (DATA_DIR / "lectures" / f"{lecture:02d}.md").exists():
+        return summary
+
+    log_dir = PROJECT_DIR / "learning_log"
+    log_dir.mkdir(parents=True, exist_ok=True)
+    log_path = log_dir / f"lecture_{lecture:02d}.md"
+    log_path.write_text(summary, encoding="utf-8")
+    return f"第{lecture}回の学習記録を {log_path} に保存しました。"

@@ -46,3 +46,14 @@ def test_default_question_of_lecture1_is_answerable_from_glossary():
     assert "3レベル" in DEFAULT_QUESTION
     hits = json.loads(tools.search_glossary("3レベル"))
     assert hits[0]["term"] == "宿題の3レベル"
+
+
+def test_save_learning_log(tmp_path, monkeypatch):
+    monkeypatch.setattr(tools, "PROJECT_DIR", tmp_path)
+
+    result = tools.save_learning_log(3)
+
+    log_path = tmp_path / "learning_log" / "lecture_03.md"
+    assert log_path.is_file()
+    assert str(log_path) in result
+    assert log_path.read_text(encoding="utf-8") == tools.get_lecture_summary(3)
